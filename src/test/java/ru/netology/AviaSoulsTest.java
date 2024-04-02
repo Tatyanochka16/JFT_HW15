@@ -48,6 +48,41 @@ public class AviaSoulsTest {
     }
 
     @Test
+    public void shouldSortSearchZero() {
+        Ticket ticket1 = new Ticket("Tokio", "Paris", 550, 17, 20);
+        Ticket ticket2 = new Ticket("Tokio", "Paris", 500, 15, 17);
+        Ticket ticket3 = new Ticket("Tokio", "Magadan", 600, 12, 21);
+        Ticket ticket4 = new Ticket("Nagasaki", "Paris", 500, 15, 17);
+        AviaSouls flight = new AviaSouls();
+
+        flight.add(ticket1);
+        flight.add(ticket2);
+        flight.add(ticket3);
+        flight.add(ticket4);
+
+
+        Ticket[] expected = {};
+        Ticket[] actual = flight.search("Tokio", "Madrid");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSortSearchOne() {
+        Ticket ticket1 = new Ticket("Tokio", "Paris", 550, 17, 20);
+        Ticket ticket2 = new Ticket("Tokio", "Magadan", 600, 12, 21);
+        Ticket ticket3 = new Ticket("Nagasaki", "Paris", 500, 15, 17);
+        AviaSouls flight = new AviaSouls();
+
+        flight.add(ticket1);
+        flight.add(ticket2);
+        flight.add(ticket3);
+
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = flight.search("Tokio", "Paris");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSortComparator() {
         Ticket ticket1 = new Ticket("Tokio", "Paris", 550, 17, 20);
         Ticket ticket2 = new Ticket("Tokio", "Paris", 500, 15, 17);
@@ -85,5 +120,42 @@ public class AviaSoulsTest {
         Ticket[] actual = flight.searchAndSortBy("Tokio", "Paris", flightTimeComparator);
         Assertions.assertArrayEquals(expected, actual);
 
+    }
+
+    @Test
+    public void shouldSortAndComparatorZero() {
+        Ticket ticket1 = new Ticket("Tokio", "Paris", 550, 17, 20);
+        Ticket ticket2 = new Ticket("Tokio", "Paris", 500, 15, 17);
+        Ticket ticket3 = new Ticket("Tokio", "Paris", 600, 12, 21);
+        Ticket ticket4 = new Ticket("Nagasaki", "Paris", 500, 15, 17);
+        Ticket ticket5 = new Ticket("Tokio", "Magadan", 600, 12, 21);
+        AviaSouls flight = new AviaSouls();
+        TicketTimeComparator flightTimeComparator = new TicketTimeComparator();
+        flight.add(ticket1);
+        flight.add(ticket2);
+        flight.add(ticket3);
+        flight.add(ticket4);
+        flight.add(ticket5);
+
+        Ticket[] expected = {};
+        Ticket[] actual = flight.searchAndSortBy("Tokio", "Madrid", flightTimeComparator);
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSortAndComparatorOne() {
+        Ticket ticket1 = new Ticket("Tokio", "Paris", 550, 17, 20);
+
+        Ticket ticket2 = new Ticket("Nagasaki", "Paris", 500, 15, 17);
+        Ticket ticket3 = new Ticket("Tokio", "Magadan", 600, 12, 21);
+        AviaSouls flight = new AviaSouls();
+        TicketTimeComparator flightTimeComparator = new TicketTimeComparator();
+        flight.add(ticket1);
+        flight.add(ticket2);
+        flight.add(ticket3);
+
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = flight.searchAndSortBy("Tokio", "Paris", flightTimeComparator);
+        Assertions.assertArrayEquals(expected, actual);
     }
 }
