@@ -35,7 +35,7 @@ public class AviaSouls {
             if (ticket.getFrom().equals(from)) { // совпадает аэропорт вылета
                 if (ticket.getTo().equals(to)) { // совпадает аэропорт прилёта
                     result = addToArray(result, ticket); // добавляем его в массив ответа
-                    Arrays.sort(result);
+                    
                 }
             }
         }
